@@ -1,0 +1,314 @@
+/* -----------------------------------------------------------------------
+   Design tokens
+   Paper/ledger palette, built for a solo owner checking balances on a
+   phone screen. Serif (Fraunces) for the money and headings, Inter for
+   working UI text. Rows are separated with hairlines, not card shadows.
+------------------------------------------------------------------------ */
+
+:root {
+  --paper: #f2f0eb;
+  --paper-raised: #ffffff;
+  --ink: #1f2a44;
+  --ink-soft: #5b6577;
+  --line: #d8d4c9;
+
+  --status-paid: #3f6b4e;
+  --status-pending: #c99a3e;
+  --status-overdue: #b5502f;
+  --loss: #b5502f;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding-bottom: 96px;
+  position: relative;
+}
+
+/* Header / hero balance */
+
+.ledger-header {
+  padding: 56px 24px 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.eyebrow-free {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.hero-total {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 52px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.hero-sub {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* Invoice list */
+
+.ledger-body {
+  padding: 8px 24px 24px;
+}
+
+.invoice-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.invoice-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  row-gap: 6px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  border-left: 3px solid transparent;
+  padding-left: 12px;
+  margin-left: -12px;
+}
+
+.invoice-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.invoice-number {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.invoice-client {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.invoice-product {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.invoice-row-amount {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: end;
+}
+
+.amount {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.invoice-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.invoice-date {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.cost-sell {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.profit-negative {
+  color: var(--loss);
+}
+
+.invoice-row.profit-negative-row {
+  border-left-color: var(--loss);
+}
+
+.delete-btn {
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.empty-state {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.empty-state-sub {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Floating add button */
+
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(31, 42, 68, 0.28);
+}
+
+.fab:focus-visible,
+.status-pill:focus-visible,
+.text-btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Entry sheet */
+
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 42, 68, 0.3);
+  display: flex;
+  align-items: flex-end;
+  z-index: 10;
+}
+
+.sheet {
+  background: var(--paper-raised);
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 20px 20px 0 0;
+  padding: 20px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sheet-header h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+}
+
+.text-btn {
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.text-btn-primary {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink);
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  resize: none;
+}
+
+.mono-input {
+  font-variant-numeric: tabular-nums;
+}
+
+.profit-preview {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.profit-preview span:first-child {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.profit-preview-value {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+}
