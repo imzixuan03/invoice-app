@@ -53,6 +53,7 @@ export default function InvoiceForm({ onSave, onCancel }) {
   return (
     <div className="sheet-backdrop">
       <form className="sheet" onSubmit={handleSubmit}>
+        <div className="sheet-handle" aria-hidden="true" />
         <div className="sheet-header">
           <button type="button" className="icon-btn" onClick={onCancel} aria-label="Cancel">
             <X size={22} />
