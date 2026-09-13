@@ -1,3 +1,5 @@
+import { X } from "react-feather";
+
 export default function InvoiceList({ invoices, onDelete }) {
   if (invoices.length === 0) {
     return (
@@ -45,7 +47,7 @@ export default function InvoiceList({ invoices, onDelete }) {
               onClick={() => onDelete(inv.id)}
               aria-label={`Delete invoice ${inv.invoiceId}`}
             >
-              ×
+              <X size={20} />
             </button>
           </div>
         </li>

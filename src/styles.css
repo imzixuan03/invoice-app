@@ -75,6 +75,50 @@ body {
   color: var(--ink-soft);
 }
 
+/* Month/year filter */
+
+.month-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+.filter-nav-btn {
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.filter-nav-btn:active {
+  background: var(--line);
+}
+
+.filter-label {
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 10px 14px;
+  min-width: 140px;
+  border-radius: 100px;
+}
+
+.filter-label:active {
+  background: var(--line);
+}
+
 /* Invoice list */
 
 .ledger-body {
@@ -164,10 +208,18 @@ body {
   border: none;
   background: none;
   color: var(--ink-soft);
-  font-size: 22px;
-  line-height: 1;
   cursor: pointer;
-  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: -10px -8px -10px 0;
+  border-radius: 50%;
+}
+
+.delete-btn:active {
+  background: var(--line);
 }
 
 .empty-state {
@@ -187,21 +239,28 @@ body {
   position: fixed;
   bottom: 28px;
   right: 24px;
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   border: none;
   background: var(--ink);
   color: var(--paper);
-  font-size: 28px;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   box-shadow: 0 6px 16px rgba(31, 42, 68, 0.28);
 }
 
+.fab:active {
+  transform: scale(0.94);
+}
+
 .fab:focus-visible,
-.status-pill:focus-visible,
-.text-btn:focus-visible,
+.icon-btn:focus-visible,
+.filter-nav-btn:focus-visible,
+.filter-label:focus-visible,
+.delete-btn:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
@@ -246,19 +305,31 @@ textarea:focus-visible {
   margin: 0;
 }
 
-.text-btn {
+.icon-btn {
   border: none;
   background: none;
-  font-family: var(--font-body);
-  font-size: 16px;
   color: var(--ink-soft);
   cursor: pointer;
-  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
 }
 
-.text-btn-primary {
-  color: var(--ink);
-  font-weight: 600;
+.icon-btn:active {
+  background: var(--line);
+}
+
+.icon-btn-primary {
+  color: var(--paper-raised);
+  background: var(--ink);
+}
+
+.icon-btn-primary:active {
+  background: var(--ink);
+  opacity: 0.85;
 }
 
 .field {
@@ -281,7 +352,8 @@ textarea:focus-visible {
   font-family: var(--font-body);
   font-size: 16px;
   color: var(--ink);
-  padding: 10px 12px;
+  padding: 13px 12px;
+  min-height: 44px;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--paper);

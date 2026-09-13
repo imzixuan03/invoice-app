@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { X, Check } from "react-feather";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -53,12 +54,12 @@ export default function InvoiceForm({ onSave, onCancel }) {
     <div className="sheet-backdrop">
       <form className="sheet" onSubmit={handleSubmit}>
         <div className="sheet-header">
-          <button type="button" className="text-btn" onClick={onCancel}>
-            Cancel
+          <button type="button" className="icon-btn" onClick={onCancel} aria-label="Cancel">
+            <X size={22} />
           </button>
           <h2>New invoice</h2>
-          <button type="submit" className="text-btn text-btn-primary">
-            Save
+          <button type="submit" className="icon-btn icon-btn-primary" aria-label="Save invoice">
+            <Check size={22} />
           </button>
         </div>
 
