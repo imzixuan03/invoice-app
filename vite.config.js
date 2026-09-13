@@ -18,8 +18,8 @@ export default defineConfig({
         name: "Invoice Ledger",
         short_name: "Ledger",
         description: "Personal invoice tracker",
-        theme_color: "#1F2A44",
-        background_color: "#F2F0EB",
+        theme_color: "#152C3E",
+        background_color: "#EEF1F6",
         display: "standalone",
         start_url: "/",
         icons: [

@@ -1,5 +1,7 @@
 import { X } from "react-feather";
 
+const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "USD" });
+
 export default function InvoiceList({ invoices, onDelete }) {
   if (invoices.length === 0) {
     return (
@@ -13,42 +15,41 @@ export default function InvoiceList({ invoices, onDelete }) {
   return (
     <ul className="invoice-list">
       {invoices.map((inv) => (
-        <li key={inv.id} className={`invoice-row ${inv.profit < 0 ? "profit-negative-row" : ""}`}>
-          <div className="invoice-row-main">
-            <span className="invoice-number">{inv.invoiceId}</span>
-            <span className="invoice-client">{inv.dealerName}</span>
-            <span className="invoice-product">
-              {inv.productType}
-              {inv.productName ? ` · ${inv.productName}` : ""}
-            </span>
+        <li key={inv.id} className="invoice-row">
+          <div className="invoice-row-top">
+            <span className="invoice-id">{inv.invoiceId}</span>
+            <div className="invoice-row-top-right">
+              <span className={`amount ${inv.profit < 0 ? "profit-negative" : ""}`}>
+                {inv.profit < 0 ? "-" : "+"}
+                {currency(Math.abs(inv.profit))}
+              </span>
+              <button
+                className="delete-btn"
+                onClick={() => onDelete(inv.id)}
+                aria-label={`Delete invoice ${inv.invoiceId}`}
+              >
+                <X size={16} />
+              </button>
+            </div>
           </div>
 
-          <div className="invoice-row-meta">
-            <span className="invoice-date">
+          <div className="invoice-row-mid">
+            {inv.dealerName}
+            {inv.productName ? ` · ${inv.productName}` : ""}
+            <span> ({inv.productType})</span>
+          </div>
+
+          <div className="invoice-row-bottom">
+            <span>
               {new Date(inv.date).toLocaleDateString(undefined, {
+                day: "2-digit",
                 month: "short",
-                day: "numeric"
+                year: "numeric"
               })}
             </span>
             <span className="cost-sell">
-              cost {inv.cost.toLocaleString(undefined, { style: "currency", currency: "USD" })}
-              {" → "}
-              sell{" "}
-              {inv.sellingPrice.toLocaleString(undefined, { style: "currency", currency: "USD" })}
+              {currency(inv.cost)} → {currency(inv.sellingPrice)}
             </span>
-          </div>
-
-          <div className="invoice-row-amount">
-            <span className={`amount ${inv.profit < 0 ? "profit-negative" : ""}`}>
-              {inv.profit.toLocaleString(undefined, { style: "currency", currency: "USD" })}
-            </span>
-            <button
-              className="delete-btn"
-              onClick={() => onDelete(inv.id)}
-              aria-label={`Delete invoice ${inv.invoiceId}`}
-            >
-              <X size={20} />
-            </button>
           </div>
         </li>
       ))}
