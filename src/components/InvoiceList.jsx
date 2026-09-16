@@ -2,7 +2,7 @@ import { X } from "react-feather";
 
 const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "USD" });
 
-export default function InvoiceList({ invoices, onDelete }) {
+export default function InvoiceList({ invoices, onDelete, onSelect }) {
   if (invoices.length === 0) {
     return (
       <div className="empty-state">
@@ -15,7 +15,7 @@ export default function InvoiceList({ invoices, onDelete }) {
   return (
     <ul className="invoice-list">
       {invoices.map((inv) => (
-        <li key={inv.id} className="invoice-row">
+        <li key={inv.id} className="invoice-row" onClick={() => onSelect(inv)}>
           <div className="invoice-row-top">
             <span className="invoice-id">{inv.invoiceId}</span>
             <div className="invoice-row-top-right">
@@ -25,7 +25,10 @@ export default function InvoiceList({ invoices, onDelete }) {
               </span>
               <button
                 className="delete-btn"
-                onClick={() => onDelete(inv.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete(inv.id);
+                }}
                 aria-label={`Delete invoice ${inv.invoiceId}`}
               >
                 <X size={16} />
@@ -49,6 +52,15 @@ export default function InvoiceList({ invoices, onDelete }) {
             </span>
             <span className="cost-sell">
               {currency(inv.cost)} → {currency(inv.sellingPrice)}
+            </span>
+          </div>
+
+          <div className="payment-status-bar">
+            <span className={`payment-chip ${inv.dealerPaid ? "paid" : "unpaid"}`}>
+              Dealer {inv.dealerPaid ? "Paid" : "Unpaid"}
+            </span>
+            <span className={`payment-chip ${inv.commissionPaid ? "paid" : "unpaid"}`}>
+              Commission {inv.commissionPaid ? "Paid" : "Unpaid"}
             </span>
           </div>
         </li>

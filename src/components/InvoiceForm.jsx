@@ -128,7 +128,7 @@ export default function InvoiceForm({ invoices, onSave, onCancel }) {
     if (!generatedId) return;
     if (!form.date || !form.dealerName || !form.productType) return;
     if (form.cost === "" || form.sellingPrice === "") return;
-    onSave({ ...form, invoiceId: generatedId });
+    onSave({ ...form, invoiceId: generatedId, dealerPaid: false, commissionPaid: false });
   }
 
   return (

@@ -48,7 +48,9 @@ function makeRecordId() {
 //   productType: string,    // e.g. "SSD", "Motherboard", "RAM"
 //   cost: number,
 //   sellingPrice: number,
-//   profit: number          // derived: sellingPrice - cost
+//   profit: number,         // derived: sellingPrice - cost
+//   dealerPaid: boolean,     // have you paid the dealer for this?
+//   commissionPaid: boolean  // has commission on this sale been paid?
 // }
 
 export async function getInvoices() {
@@ -75,6 +77,17 @@ export async function saveInvoice(invoice) {
 export async function deleteInvoice(id) {
   const db = await dbPromise();
   await db.delete(INVOICE_STORE, id);
+}
+
+// Shallow-merges a patch into an existing invoice record - used for toggling
+// dealerPaid / commissionPaid without needing the full invoice object.
+export async function updateInvoice(id, patch) {
+  const db = await dbPromise();
+  const record = await db.get(INVOICE_STORE, id);
+  if (!record) return null;
+  const updated = { ...record, ...patch };
+  await db.put(INVOICE_STORE, updated);
+  return updated;
 }
 
 // Company shape: { id, code, name }

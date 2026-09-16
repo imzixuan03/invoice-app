@@ -304,6 +304,11 @@ button {
   gap: 4px;
   padding: 16px 0;
   border-bottom: 1px solid var(--divider);
+  cursor: pointer;
+}
+
+.invoice-row:active {
+  background: var(--bg);
 }
 
 .invoice-row:last-child {
@@ -379,6 +384,66 @@ button {
 
 .cost-sell {
   font-variant-numeric: tabular-nums;
+}
+
+.payment-status-bar {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.payment-chip {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 4px 9px;
+  border-radius: 100px;
+}
+
+.payment-chip.paid {
+  background: var(--teal-tint);
+  color: var(--teal);
+}
+
+.payment-chip.unpaid {
+  background: var(--loss-tint);
+  color: var(--loss);
+}
+
+/* Payment status filter chips */
+
+.payment-filter-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.payment-filter-row::-webkit-scrollbar {
+  display: none;
+}
+
+.payment-filter-chip {
+  flex-shrink: 0;
+  border: 1px solid var(--divider);
+  background: var(--card);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.payment-filter-chip.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
 }
 
 .empty-state {
@@ -650,6 +715,111 @@ button {
 
 .btn-save-full:active {
   transform: scale(0.98);
+}
+
+/* Invoice detail page */
+
+.detail-card {
+  padding: 4px 16px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--divider);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.detail-card .detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+}
+
+.payment-toggle-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-toggle-label {
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.payment-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  border: 1px solid var(--divider);
+  background: var(--card);
+  border-radius: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.1s ease;
+}
+
+.payment-toggle-btn:active {
+  transform: scale(0.98);
+}
+
+.payment-toggle-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--loss-tint);
+  color: var(--loss);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.payment-toggle-btn.is-paid .payment-toggle-icon {
+  background: var(--teal);
+  color: #fff;
+}
+
+.payment-toggle-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.payment-toggle-text strong {
+  font-size: 14px;
+  color: var(--navy);
+}
+
+.payment-toggle-text span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.payment-toggle-btn.is-paid {
+  border-color: var(--teal);
+  background: var(--teal-tint);
+}
+
+.payment-toggle-btn.is-paid .payment-toggle-text span {
+  color: var(--teal);
+  font-weight: 600;
 }
 
 *:focus-visible {

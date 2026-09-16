@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Plus, FileText, TrendingUp, ArrowUp, ArrowDown } from "react-feather";
-import { getInvoices, saveInvoice, deleteInvoice } from "./db.js";
+import { getInvoices, saveInvoice, deleteInvoice, updateInvoice } from "./db.js";
 import InvoiceList from "./components/InvoiceList.jsx";
 import InvoiceForm from "./components/InvoiceForm.jsx";
+import InvoiceDetail from "./components/InvoiceDetail.jsx";
 import MonthFilter from "./components/MonthFilter.jsx";
+import PaymentFilterBar from "./components/PaymentFilterBar.jsx";
 
 const MONTH_LABELS = [
   "January", "February", "March", "April", "May", "June",
@@ -30,13 +32,31 @@ function percentDelta(current, previous) {
   return ((current - previous) / previous) * 100;
 }
 
+// Whether an invoice matches the selected payment-status filter chip.
+function paymentMatches(inv, paymentFilter) {
+  switch (paymentFilter) {
+    case "dealerPaid":
+      return !!inv.dealerPaid && !inv.commissionPaid;
+    case "commissionPaid":
+      return !!inv.commissionPaid && !inv.dealerPaid;
+    case "bothPaid":
+      return !!inv.dealerPaid && !!inv.commissionPaid;
+    case "unpaid":
+      return !inv.dealerPaid && !inv.commissionPaid;
+    default:
+      return true;
+  }
+}
+
 export default function App() {
   const [invoices, setInvoices] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [viewingInvoiceId, setViewingInvoiceId] = useState(null);
 
   // "all" for either field means that dimension isn't filtered.
   const [filter, setFilter] = useState({ month: now.getMonth(), year: now.getFullYear() });
+  const [paymentFilter, setPaymentFilter] = useState("all");
 
   async function refresh() {
     const all = await getInvoices();
@@ -59,6 +79,15 @@ export default function App() {
     refresh();
   }
 
+  async function handleTogglePayment(id, field, value) {
+    await updateInvoice(id, { [field]: value });
+    refresh();
+  }
+
+  // Derived from the live invoices list (rather than stored as its own
+  // object) so it always reflects the latest payment status after a toggle.
+  const viewingInvoice = invoices.find((inv) => inv.id === viewingInvoiceId) || null;
+
   const years = useMemo(() => {
     const set = new Set(invoices.map((inv) => new Date(inv.date).getFullYear()));
     set.add(now.getFullYear());
@@ -70,9 +99,9 @@ export default function App() {
       const d = new Date(inv.date);
       const monthOk = filter.month === "all" || d.getMonth() === Number(filter.month);
       const yearOk = filter.year === "all" || d.getFullYear() === Number(filter.year);
-      return monthOk && yearOk;
+      return monthOk && yearOk && paymentMatches(inv, paymentFilter);
     });
-  }, [invoices, filter]);
+  }, [invoices, filter, paymentFilter]);
 
   const totalSales = filteredInvoices.reduce((sum, inv) => sum + Number(inv.sellingPrice || 0), 0);
   const totalProfit = filteredInvoices.reduce((sum, inv) => sum + Number(inv.profit || 0), 0);
@@ -172,11 +201,17 @@ export default function App() {
             onChangeYear={(year) => setFilter((f) => ({ ...f, year: year === "all" ? "all" : Number(year) }))}
           />
 
+          <PaymentFilterBar value={paymentFilter} onChange={setPaymentFilter} />
+
           <div className="invoice-card">
             {loading ? (
               <p className="empty-state">Loading your invoices…</p>
             ) : (
-              <InvoiceList invoices={filteredInvoices} onDelete={handleDelete} />
+              <InvoiceList
+                invoices={filteredInvoices}
+                onDelete={handleDelete}
+                onSelect={(inv) => setViewingInvoiceId(inv.id)}
+              />
             )}
           </div>
         </section>
@@ -184,6 +219,15 @@ export default function App() {
 
       {showForm && (
         <InvoiceForm invoices={invoices} onSave={handleSave} onCancel={() => setShowForm(false)} />
+      )}
+
+      {viewingInvoice && (
+        <InvoiceDetail
+          invoice={viewingInvoice}
+          onClose={() => setViewingInvoiceId(null)}
+          onTogglePayment={handleTogglePayment}
+          onDelete={handleDelete}
+        />
       )}
     </div>
   );
