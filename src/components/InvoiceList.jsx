@@ -1,6 +1,6 @@
 import { X } from "react-feather";
 
-const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "USD" });
+const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "MYR" });
 
 export default function InvoiceList({ invoices, onDelete, onSelect }) {
   if (invoices.length === 0) {
@@ -23,16 +23,6 @@ export default function InvoiceList({ invoices, onDelete, onSelect }) {
                 {inv.profit < 0 ? "-" : "+"}
                 {currency(Math.abs(inv.profit))}
               </span>
-              <button
-                className="delete-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDelete(inv.id);
-                }}
-                aria-label={`Delete invoice ${inv.invoiceId}`}
-              >
-                <X size={16} />
-              </button>
             </div>
           </div>
 

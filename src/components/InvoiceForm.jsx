@@ -3,7 +3,7 @@ import { X, Check, Plus } from "react-feather";
 import { getCompanies, saveCompany } from "../db.js";
 
 const today = new Date();
-const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "USD" });
+const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "MYR" });
 
 const MONTH_OPTIONS = [
   { value: "01", label: "01 · January" },

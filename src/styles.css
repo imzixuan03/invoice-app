@@ -78,8 +78,8 @@ button {
   width: 32px;
   height: 32px;
   border-radius: 9px;
-  background: var(--teal);
-  color: #fff;
+  background: whitesmoke;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,7 +89,7 @@ button {
 .brand-name {
   font-weight: 700;
   font-size: 16px;
-  color: var(--navy);
+  color: black;
 }
 
 .btn-create {
@@ -97,7 +97,7 @@ button {
   height: 40px;
   border-radius: 50%;
   border: none;
-  background: var(--teal);
+  background: black;
   color: #fff;
   display: flex;
   align-items: center;
@@ -121,7 +121,7 @@ button {
   margin: 0;
   font-size: 22px;
   font-weight: 800;
-  color: var(--navy);
+  color: black;
 }
 
 .page-intro p {
@@ -145,7 +145,7 @@ button {
 }
 
 .stat-card-dark {
-  background: linear-gradient(155deg, var(--navy-soft), var(--navy));
+  background: black ;
   color: var(--text-on-navy);
 }
 
@@ -184,13 +184,13 @@ button {
 }
 
 .stat-card-dark .stat-icon {
-  background: rgba(255, 255, 255, 0.14);
-  color: #fff;
+  background: whitesmoke;
+  color: black;
 }
 
 .stat-card-light .stat-icon {
-  background: var(--teal-tint);
-  color: var(--teal);
+  background: black;
+  color: whitesmoke;
 }
 
 .stat-value {
@@ -202,7 +202,7 @@ button {
 }
 
 .stat-card-light .stat-value {
-  color: var(--navy);
+  color: black;
 }
 
 .stat-delta {
@@ -240,7 +240,7 @@ button {
   margin: 0;
   font-size: 17px;
   font-weight: 700;
-  color: var(--navy);
+  color: black;
 }
 
 .invoices-header p {
@@ -274,7 +274,7 @@ button {
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
-  color: var(--navy);
+  color: black;
   background: var(--card);
   border: 1px solid var(--divider);
   border-radius: 10px;
@@ -325,7 +325,7 @@ button {
 .invoice-id {
   font-size: 14px;
   font-weight: 700;
-  color: var(--navy);
+  color: black;
 }
 
 .invoice-row-top-right {
@@ -441,7 +441,7 @@ button {
 }
 
 .payment-filter-chip.active {
-  background: var(--navy);
+  background: black;
   border-color: var(--navy);
   color: #fff;
 }
@@ -488,8 +488,8 @@ button {
 
 .icon-btn {
   border: none;
-  background: var(--bg);
-  color: var(--text-muted);
+  background: white;
+  color: black;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -632,9 +632,12 @@ button {
 
 .id-preview-value {
   font-size: 15px;
-  font-weight: 800;
-  color: var(--navy);
+  font-weight: 650;
+  color: black;
   font-variant-numeric: tabular-nums;
+  background: var(--card);
+  padding: 4px 8px;
+  border-radius: 8px; 
 }
 
 .field input,
@@ -701,7 +704,7 @@ button {
   padding: 15px;
   border: none;
   border-radius: 14px;
-  background: var(--teal);
+  background: black;
   color: #fff;
   font-size: 15px;
   font-weight: 700;
@@ -730,7 +733,7 @@ button {
   gap: 12px;
   padding: 14px 0;
   border-bottom: 1px solid var(--divider);
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-muted);
 }
 
@@ -739,9 +742,9 @@ button {
 }
 
 .detail-row strong {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--text);
+  color: black  ;
   text-align: right;
 }
 

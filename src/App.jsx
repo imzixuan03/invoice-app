@@ -13,7 +13,7 @@ const MONTH_LABELS = [
 ];
 
 const now = new Date();
-const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "USD" });
+const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "MYR" });
 
 // Sums selling price / profit for invoices falling in a given month+year.
 function periodTotals(invoices, month, year) {
@@ -138,7 +138,7 @@ export default function App() {
           <span className="brand-icon">
             <FileText size={17} />
           </span>
-          <span className="brand-name">Invoice Ledger</span>
+          <span className="brand-name">Uncle Chan's Invoice App</span>
         </div>
         <button className="btn-create" onClick={() => setShowForm(true)} aria-label="Create invoice">
           <Plus size={20} />

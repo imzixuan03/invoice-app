@@ -1,6 +1,6 @@
 import { X, Check, Truck, DollarSign, Trash2 } from "react-feather";
 
-const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "USD" });
+const currency = (n) => Number(n || 0).toLocaleString(undefined, { style: "currency", currency: "MYR" });
 
 export default function InvoiceDetail({ invoice, onClose, onTogglePayment, onDelete }) {
   if (!invoice) return null;
