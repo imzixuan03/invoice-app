@@ -13,7 +13,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["apple-touch-icon.png"],
+      includeAssets: ["invoice.png"],
       manifest: {
         name: "Invoice Tracker",
         short_name: "Tracker",
