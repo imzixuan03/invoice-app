@@ -557,7 +557,13 @@ button {
 }
 
 .field-row.three-col {
-  grid-template-columns: 1.2fr 1fr 0.8fr;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 0.8fr);
+}
+
+.field-row .field,
+.field-row select {
+  min-width: 0;
+  width: 100%;
 }
 
 .field-row .field {
@@ -577,21 +583,13 @@ button {
 
 .add-company-inputs {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: 8px;
 }
 
 .add-company-inputs input {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
-  padding: 10px 10px;
-  border: 1px solid var(--divider);
-  border-radius: 8px;
-  background: var(--card);
-  min-height: 40px;
-  text-transform: none;
+  min-width: 0;
+  width: 100%;
 }
 
 .btn-add-company {
