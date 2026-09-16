@@ -182,7 +182,9 @@ export default function App() {
         </section>
       </main>
 
-      {showForm && <InvoiceForm onSave={handleSave} onCancel={() => setShowForm(false)} />}
+      {showForm && (
+        <InvoiceForm invoices={invoices} onSave={handleSave} onCancel={() => setShowForm(false)} />
+      )}
     </div>
   );
 }
