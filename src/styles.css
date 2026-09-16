@@ -590,11 +590,16 @@ button {
 .add-company-inputs input {
   min-width: 0;
   width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  font: inherit;
+  padding: 1px 8px;
+  font-size: 15px;
 }
 
 .btn-add-company {
-  border: none;
-  background: var(--teal);
+  border: 1px solid var(--divider);
+  background: black;
   color: #fff;
   font-size: 13px;
   font-weight: 700;
