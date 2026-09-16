@@ -15,16 +15,16 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["apple-touch-icon.png"],
       manifest: {
-        name: "Invoice Ledger",
-        short_name: "Ledger",
+        name: "Invoice Tracker",
+        short_name: "Tracker",
         description: "Personal invoice tracker",
         theme_color: "#152C3E",
         background_color: "#EEF1F6",
         display: "standalone",
         start_url: "/invoice-app/",
         icons: [
-          { src: "icon-192.png", sizes: "192x192", type: "image/png" },
-          { src: "icon-512.png", sizes: "512x512", type: "image/png" }
+          { src: "invoice.png", sizes: "192x192", type: "image/png" },
+          { src: "invoice.png", sizes: "512x512", type: "image/png" }
         ]
       }
     })
